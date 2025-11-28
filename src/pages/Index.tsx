@@ -1,14 +1,15 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { HangmanGame } from '@/components/HangmanGame';
+import { WordManager } from '@/components/WordManager';
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [view, setView] = useState<'game' | 'manage'>('game');
+
+  if (view === 'manage') {
+    return <WordManager onBack={() => setView('game')} />;
+  }
+
+  return <HangmanGame onManageWords={() => setView('manage')} />;
 };
 
 export default Index;
